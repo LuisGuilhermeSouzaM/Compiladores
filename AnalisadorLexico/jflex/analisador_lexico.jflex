@@ -37,8 +37,7 @@ package analisador_lexico;
 
 %xstate IN_STR
 %xstate IN_COM
-any = .*
-comment = "/*"{any}"*/"
+
 delim	= [\ \t\n]
 punct = [{ } ; ( ) ,]
 ws		= {delim}+
@@ -52,7 +51,7 @@ character = ({letter} | {digit})
 /* Regras e ações */
 <YYINITIAL> {
     "\"" 	    { yybegin(IN_STR); buffer.setLength(0); }
-    "/*"      { yybegin(IN_COM); comment.setLength(0); }
+    "/*"        { yybegin(IN_COM); comment.setLength(0); }
     {ws}		{ /* ignorar */ }
     program		{ return new Token(Tag.PROGRAM); }
     if			{ return new Token(Tag.IF); }
