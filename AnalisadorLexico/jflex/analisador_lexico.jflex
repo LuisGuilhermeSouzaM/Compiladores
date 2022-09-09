@@ -28,10 +28,15 @@ package analisador_lexico;
 %}
 
 %{
+    // Buffer para armazenar as cadeias de caracteres
+    private StringBuffer comment = new StringBuffer();
+%}
+%{
 // Macros
 %}
 
 %xstate IN_STR
+%xstate IN_COM
 any = .*
 comment = "/*"{any}"*/"
 delim	= [\ \t\n]
@@ -47,6 +52,7 @@ character = ({letter} | {digit})
 /* Regras e ações */
 <YYINITIAL> {
     "\"" 	    { yybegin(IN_STR); buffer.setLength(0); }
+    "/*"      { yybegin(IN_COM); comment.setLength(0); }
     {ws}		{ /* ignorar */ }
     program		{ return new Token(Tag.PROGRAM); }
     if			{ return new Token(Tag.IF); }
@@ -84,5 +90,12 @@ character = ({letter} | {digit})
 	"\""		{ yybegin(YYINITIAL); 
 				    return new Str(buffer.toString()); }
 	.|{delim}	{ buffer.append(yytext()); }
+    <<EOF>> {throw new Error("cadeia não terminada");}
+}
+
+<IN_COM> {
+	"*/"		{ yybegin(YYINITIAL); 
+				    return new Str(comment.toString()); }
+	.|{delim}	{ comment.append(yytext()); }
     <<EOF>> {throw new Error("cadeia não terminada");}
 }
