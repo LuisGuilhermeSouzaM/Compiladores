@@ -62,7 +62,6 @@ character = ({letter} | {digit})
     end		    { return new Token(Tag.END); }
     {id}		{ return new Id(yytext()); }
     {number}	{ return new Num(Double.parseDouble(yytext())); }
-    {comment}   { return new Comment(yytext()); }
     {punct}     { return new Punctuation(yytext());}
     {char}      { return new Char(yytext());}
     "<"			{ return new Relop(Tag.LT);}
