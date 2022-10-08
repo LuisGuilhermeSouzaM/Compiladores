@@ -10,7 +10,7 @@ parser code {:
 // Definição dos terminais
 terminal            SEMI, PLUS, MINUS, TIMES, DIVIDE, MOD;
 terminal            UMINUS, LPAREN, RPAREN, ASSIGN, SIN, COS, POWER;
-terminal Double     NUMBER;
+terminal Double     NUMBER, PI;
 terminal String     ID;
 // Definição dos não-terminais
 non terminal            expr_list, expr_part;
@@ -47,6 +47,7 @@ expr ::= expr:e1 PLUS expr:e2
     | LPAREN expr:e RPAREN {: RESULT = e; :}
     | SIN expr:e RPAREN {: RESULT = Math.sin(e); :}
     | COS expr:e RPAREN {: RESULT = Math.cos(e); :}
+    | PI {: RESULT = Math.PI; :}
     | expr:e1 POWER expr:e2 {: RESULT = Math.pow(e1, e2); :}
     | ID:id ASSIGN expr:e {: symbolTable.put(id, e); RESULT = e; :}
     | ID:id  {: Double value = symbolTable.get(id); if (value != null) {

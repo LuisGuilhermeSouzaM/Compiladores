@@ -40,9 +40,10 @@ cos = "cos("
 "("         { return symbol(sym.LPAREN); }
 ")"         { return symbol(sym.RPAREN); }
 "="         { return symbol(sym.ASSIGN); }
-"**"        { return symbol(sym.POWER);}
-{sin}       { return symbol(sym.SIN);}
-{cos}       { return symbol(sym.COS);}
+"**"        { return symbol(sym.POWER); }
+"PI"        { return symbol(sym.PI); }
+{sin}       { return symbol(sym.SIN); }
+{cos}       { return symbol(sym.COS); }
 {id}        { return symbol(sym.ID, yytext()); }
 {number}    { return symbol(sym.NUMBER, Double.valueOf(yytext())); }
 {ws}        {/* Ignore */}
