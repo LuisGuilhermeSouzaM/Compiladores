@@ -797,7 +797,7 @@ class Scanner implements java_cup.runtime.Scanner {
             // fall through
           case 28: break;
           case 14:
-            { return symbol(sym.COS);
+            { return symbol(sym.cos);
             }
             // fall through
           case 29: break;

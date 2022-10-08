@@ -28,6 +28,8 @@ import java_cup.runtime.*;
 ws = [\ \t\f\r\n]
 number = \d+(\.\d+)?(["E""e"]["+""‐"]?\d+)?
 id = [A-Za-z]([A-Za-z0-9])*
+sin = "sin("
+cos = "cos("
 %%
 ";"         { return symbol(sym.SEMI); }
 "+"         { return symbol(sym.PLUS); }
@@ -38,10 +40,10 @@ id = [A-Za-z]([A-Za-z0-9])*
 "("         { return symbol(sym.LPAREN); }
 ")"         { return symbol(sym.RPAREN); }
 "="         { return symbol(sym.ASSIGN); }
+{sin}       { return symbol(sym.SIN);}
+{cos}       { return symbol(sym.COS);}
 {id}        { return symbol(sym.ID, yytext()); }
 {number}    { return symbol(sym.NUMBER, Double.valueOf(yytext())); }
 {ws}        {/* Ignore */}
 .           { throw new Error("Simbolo inválido detectado: \"" + yycharat(0) +
               "\" ( linha: " +  yyline + ", coluna: " + yycolumn + ")"); }
-
-
