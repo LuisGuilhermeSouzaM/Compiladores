@@ -16,3 +16,5 @@ a;
 x = 3 * sin((a + x - 2.7 * 75) ** 47 / 8 ) * cos(PI);
 sin(PI/2);
 sin(PI/3);
+sin(;
+x/0;
