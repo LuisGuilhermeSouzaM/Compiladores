@@ -58,7 +58,7 @@ expr ::= expr:e1 PLUS expr:e2
     | ID:id  {: Double value = symbolTable.get(id); if (value != null) {
         RESULT = value;
         } else { 
-               throw new Exception("variavel " + id + " nao declarada!");
+               throw new Exception("variavel " + id + " não inicializada!");
         }
                :}
     ;

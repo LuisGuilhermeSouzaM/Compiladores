@@ -26,7 +26,7 @@ import java_cup.runtime.*;
 %}
 
 ws = [\ \t\f\r\n]
-number = \d+(\.\d+)?(["E""e"]["+""‐"]?\d+)?
+number = \d+(\.\d+)?(["E""e"]["+""-"]?\d+)?
 id = [A-Za-z]([A-Za-z0-9])*
 sin = "sin("
 cos = "cos("
